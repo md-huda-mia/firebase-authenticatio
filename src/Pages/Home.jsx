@@ -1,4 +1,8 @@
+import { NavLink } from "react-router-dom";
+import UseAuth from "../Hook/useAuth";
+
 const Home = () => {
+  const { user } = UseAuth();
   return (
     <section>
       <div className="">
@@ -11,23 +15,33 @@ const Home = () => {
             using email password. Powered by Firebase.!
           </p>
           <div className="flex flex-wrap justify-center">
-            <button
-              type="button"
-              className="px-8 py-3 m-2 text-lg font-semibold rounded bg-gray-800 hover:bg-gray-700 text-gray-50">
-              Visit Profile
-            </button>
+            {user?.email ? (
+              <>
+                <button
+                  type="button"
+                  className="px-8 py-3 m-2 text-lg font-semibold rounded bg-gray-800 hover:bg-gray-700 text-gray-50">
+                  Visit Profile
+                </button>
+              </>
+            ) : (
+              <>
+                <NavLink to="/login">
+                  <button
+                    type="button"
+                    className="px-8 py-3 m-2 text-lg font-semibold rounded bg-gray-800 hover:bg-gray-700 text-gray-50">
+                    Login
+                  </button>
+                </NavLink>
 
-            <button
-              type="button"
-              className="px-8 py-3 m-2 text-lg font-semibold rounded bg-gray-800 hover:bg-gray-700 text-gray-50">
-              Login
-            </button>
-
-            <button
-              type="button"
-              className="px-8 py-3 m-2 text-lg border rounded border-gray-700 text-gray-900">
-              Register
-            </button>
+                <NavLink to="/register">
+                  <button
+                    type="button"
+                    className="px-8 py-3 m-2 text-lg border rounded border-gray-700 text-gray-900">
+                    Register
+                  </button>
+                </NavLink>
+              </>
+            )}
           </div>
         </div>
       </div>

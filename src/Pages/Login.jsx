@@ -1,10 +1,13 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import UseAuth from "../Hook/useAuth";
 import { toast } from "react-toastify";
 
 const Login = () => {
   // =======
   const { loginUser } = UseAuth();
+  const navigate = useNavigate();
+  const location = useLocation();
+  const from = location.state?.from?.pathname || "/";
   // ==========
   const submitHandler = (e) => {
     e.preventDefault();
@@ -13,7 +16,7 @@ const Login = () => {
     loginUser(email, password)
       .then((result) => {
         toast.success("Loging successfully");
-        console.log(result.user);
+        navigate(from, { replace: true });
       })
       .catch((error) => {
         toast.error(error.message);

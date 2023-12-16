@@ -7,11 +7,13 @@ import {
 import { createContext, useEffect, useState } from "react";
 import React from "react";
 import { auth } from "../Firebase/firebase.config";
+import { useLocation, useNavigate } from "react-router-dom";
 
 export const AuthContext = createContext(null);
 
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState({});
+
   //===== create user email and password ========
   const createuser = (email, password) => {
     return createUserWithEmailAndPassword(auth, email, password);

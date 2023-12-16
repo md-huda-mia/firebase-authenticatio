@@ -1,10 +1,15 @@
 import React from "react";
 import { toast } from "react-toastify";
 import UseAuth from "../Hook/useAuth";
+import { NavLink, useLocation, useNavigate } from "react-router-dom";
 
 const Register = () => {
   const { createuser } = UseAuth();
+  const navigate = useNavigate();
+  const location = useLocation();
+  const from = location.state?.from?.pathname || "/";
 
+  // ====== submitHandler ========
   const submitHandler = (e) => {
     e.preventDefault();
     const name = e.target.name.value;
@@ -14,6 +19,7 @@ const Register = () => {
     createuser(email, password)
       .then((result) => {
         toast.success("user create successfully");
+        navigate(from, { replace: true });
         console.log(result.user);
       })
       .catch((error) => {
@@ -122,9 +128,9 @@ const Register = () => {
         </div>
         <p className="px-6 text-sm text-center text-gray-400">
           Already have an account yet?{" "}
-          <a href="#" className="hover:underline text-gray-600">
+          <NavLink to="/login" className="hover:underline text-gray-600">
             Sign In
-          </a>
+          </NavLink>
           .
         </p>
       </div>
