@@ -1,8 +1,8 @@
 import { NavLink } from "react-router-dom";
-import UseAuth from "../Hook/useAuth";
+import useAuth from "../Hook/useAuth";
 
 const Navbar = () => {
-  const { user, logOut } = UseAuth();
+  const { user, logOut } = useAuth();
   return (
     <header className="text-gray-600 body-font">
       <div className="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
