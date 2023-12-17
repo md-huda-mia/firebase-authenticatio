@@ -1,10 +1,10 @@
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import useAuth from "../Hook/useAuth";
+import AuthHook from "../Hook/AuthHook";
 
 const Login = () => {
   // =======
-  const { loginUser } = useAuth();
+  const { loginUser } = AuthHook();
   const navigate = useNavigate();
   const location = useLocation();
   const from = location.state?.from?.pathname || "/";

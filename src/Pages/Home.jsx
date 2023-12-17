@@ -1,8 +1,8 @@
 import { NavLink } from "react-router-dom";
-import useAuth from "../Hook/useAuth";
+import AuthHook from "../Hook/AuthHook";
 
 const Home = () => {
-  const { user } = useAuth();
+  const { user } = AuthHook();
   return (
     <section>
       <div className="">
