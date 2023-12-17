@@ -1,10 +1,10 @@
 import React from "react";
 import { toast } from "react-toastify";
-import UseAuth from "../Hook/useAuth";
+import useAuth from "../Hook/useAuth";
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
 
 const Register = () => {
-  const { createuser, profileUpdate } = UseAuth();
+  const { createuser, profileUpdate } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
   const from = location.state?.from?.pathname || "/";
@@ -23,7 +23,7 @@ const Register = () => {
         profileUpdate(name)
           .then(() => {
             toast.success("Name Updated");
-            navigate(from, { replace: true });
+            navigate(u, { replace: true });
           })
           .catch((error) => {
             toast.error(error.message);

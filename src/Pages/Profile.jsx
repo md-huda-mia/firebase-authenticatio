@@ -1,10 +1,10 @@
 import React from "react";
 
 import avatarImg from "../assets/avatar.jpeg";
-import UseAuth from "../Hook/useAuth";
+import useAuth from "../Hook/useAuth";
 
 const Profile = () => {
-  const { user } = UseAuth();
+  const { user } = useAuth();
 
   return (
     <div className="flex justify-center mt-20">
