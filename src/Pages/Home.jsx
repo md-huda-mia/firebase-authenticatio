@@ -17,11 +17,13 @@ const Home = () => {
           <div className="flex flex-wrap justify-center">
             {user?.email ? (
               <>
-                <button
-                  type="button"
-                  className="px-8 py-3 m-2 text-lg font-semibold rounded bg-gray-800 hover:bg-gray-700 text-gray-50">
-                  Visit Profile
-                </button>
+                <NavLink to="/profile">
+                  <button
+                    type="button"
+                    className="px-8 py-3 m-2 text-lg font-semibold rounded bg-gray-800 hover:bg-gray-700 text-gray-50">
+                    Visit Profile
+                  </button>
+                </NavLink>
               </>
             ) : (
               <>

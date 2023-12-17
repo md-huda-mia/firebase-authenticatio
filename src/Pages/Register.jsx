@@ -4,7 +4,7 @@ import UseAuth from "../Hook/useAuth";
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
 
 const Register = () => {
-  const { createuser } = UseAuth();
+  const { createuser, profileUpdate } = UseAuth();
   const navigate = useNavigate();
   const location = useLocation();
   const from = location.state?.from?.pathname || "/";
@@ -15,18 +15,26 @@ const Register = () => {
     const name = e.target.name.value;
     const email = e.target.email.value;
     const password = e.target.password.value;
-
+    // create User
     createuser(email, password)
       .then((result) => {
         toast.success("user create successfully");
-        navigate(from, { replace: true });
+        // === update profile name and img
+        profileUpdate(name)
+          .then(() => {
+            toast.success("Name Updated");
+            navigate(from, { replace: true });
+          })
+          .catch((error) => {
+            toast.error(error.message);
+            console.log(error);
+          });
+
         console.log(result.user);
       })
       .catch((error) => {
         toast.error(error.message);
       });
-
-    console.log(name, email, password);
   };
 
   return (
