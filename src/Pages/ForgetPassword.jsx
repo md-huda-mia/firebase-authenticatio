@@ -5,19 +5,19 @@ import { useState } from "react";
 
 const ForgetPassword = () => {
   // =======
-  const { forgetPass } = AuthHook();
+  const { resetPassword } = AuthHook();
   const [userEmail, setUserEmail] = useState("");
   const navigate = useNavigate();
   const location = useLocation();
   const from = location.state?.from?.pathname || "/";
   // ==========
 
+  //Reset Pass
   const handleReset = (e) => {
     e.preventDefault();
-    forgetPass(userEmail)
+    resetPassword(userEmail)
       .then(() => {
         toast.success("Reset link has been sent, please check email");
-        navigate(from, { replace: true });
       })
       .catch((error) => toast.error(error.message));
   };
