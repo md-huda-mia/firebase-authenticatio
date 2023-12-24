@@ -27,15 +27,14 @@ const Navbar = () => {
             Home
           </NavLink>
 
-          <NavLink to="/profile" className="mr-5 hover:text-gray-900">
-            Profile
-          </NavLink>
-          <NavLink to="wallet" className="mr-5 hover:text-gray-900">
-            Wallet
-          </NavLink>
-
           {user?.email ? (
             <>
+              <NavLink to="/profile" className="mr-5 hover:text-gray-900">
+                Profile
+              </NavLink>
+              <NavLink to="wallet" className="mr-5 hover:text-gray-900">
+                Wallet
+              </NavLink>
               <button
                 onClick={logOut}
                 className="inline-flex items-center bg-gray-300 border-0 py-1 px-3 focus:outline-none hover:bg-gray-200 rounded text-base mt-4 md:mt-0">

@@ -4,7 +4,7 @@ import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import AuthHook from "../Hook/AuthHook";
 
 const Register = () => {
-  const { createuser, profileUpdate } = AuthHook();
+  const { createuser, profileUpdate, emailVerify } = AuthHook();
   const navigate = useNavigate();
   const location = useLocation();
   const from = location.state?.from?.pathname || "/";
@@ -23,10 +23,16 @@ const Register = () => {
         profileUpdate(name)
           .then(() => {
             toast.success("Name Updated");
-            navigate(u, { replace: true });
+            emailVerify()
+              .then(() => {
+                toast.success("Please check your email for verification link");
+                navigate(from, { replace: true });
+              })
+              .catch((error) => {
+                console.log(error);
+              });
           })
           .catch((error) => {
-            toast.error(error.message);
             console.log(error);
           });
 

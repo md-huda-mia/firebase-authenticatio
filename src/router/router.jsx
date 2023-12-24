@@ -6,6 +6,8 @@ import Register from "../Pages/Register";
 import Profile from "../Pages/Profile";
 import ErrorPage from "../Pages/ErrorPage";
 import Wallet from "../Pages/Wallet";
+import PrivetRouter from "./PrivetRouter";
+import ForgetPassword from "../Pages/ForgetPassword";
 
 const router = createBrowserRouter([
   {
@@ -27,11 +29,24 @@ const router = createBrowserRouter([
       },
       {
         path: "/profile",
-        element: <Profile />,
+        element: (
+          <PrivetRouter>
+            {" "}
+            <Profile />{" "}
+          </PrivetRouter>
+        ),
       },
       {
         path: "/wallet",
-        element: <Wallet />,
+        element: (
+          <PrivetRouter>
+            <Wallet />
+          </PrivetRouter>
+        ),
+      },
+      {
+        path: "/forgetpassword",
+        element: <ForgetPassword />,
       },
     ],
   },

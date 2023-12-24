@@ -45,8 +45,16 @@ const Profile = () => {
             </span>
             <span className="flex items-center space-x-2 w-full">
               <span className="text-gray-400 text-small">
-                {" "}
-                Email Status: <span className="text-green-400">Undefined</span>
+                Email Status:{" "}
+                {user?.emailVerified ? (
+                  <>
+                    <span className="text-green-400">Verified</span>
+                  </>
+                ) : (
+                  <>
+                    <span className="text-red-400">Undefined</span>
+                  </>
+                )}
               </span>
             </span>
             <span className="flex items-center space-x-2 w-full">

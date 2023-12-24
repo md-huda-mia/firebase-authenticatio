@@ -1,6 +1,7 @@
 import {
   createUserWithEmailAndPassword,
   onAuthStateChanged,
+  sendEmailVerification,
   signInWithEmailAndPassword,
   signOut,
   updateProfile,
@@ -8,40 +9,64 @@ import {
 import { createContext, useEffect, useState } from "react";
 import React from "react";
 import { auth } from "../Firebase/firebase.config";
-import { useLocation, useNavigate } from "react-router-dom";
 
 export const AuthContext = createContext(null);
 
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState({});
+  const [loading, setLoading] = useState(true);
 
   //===== create user email and password ========
   const createuser = (email, password) => {
+    setLoading(true);
     return createUserWithEmailAndPassword(auth, email, password);
   };
   // ======= login ========
   const loginUser = (email, password) => {
+    setLoading(true);
     return signInWithEmailAndPassword(auth, email, password);
   };
 
   // ===== user Profile Update ======
   const profileUpdate = (name) => {
+    setLoading(true);
     return updateProfile(auth.currentUser, {
       displayName: name,
     });
   };
+
+  // =========  Email Verify
+  const emailVerify = () => {
+    setLoading(true);
+    return sendEmailVerification(auth.currentUser);
+  };
+  // ===== Forget Password =====
+  const forgetPass = (email) => {
+    setLoading(true);
+    return sendEmailVerification(auth.currentUser, email);
+  };
   //======= logout ======
   const logOut = () => {
+    setLoading(true);
     return signOut(auth);
   };
   // ===== user state =====
   useEffect(() => {
-    onAuthStateChanged(auth, (user) => {
-      setUser(user);
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      try {
+        setUser(user);
+        setLoading(false);
+      } catch (error) {
+        console.error("Error setting user:", error);
+      }
     });
-    console.log(user);
-  }, [user]);
 
+    console.log(user);
+    return () => {
+      // Unsubscribe when the component unmounts
+      unsubscribe();
+    };
+  }, [user]);
   // ===========
   const authentication = {
     createuser,
@@ -49,6 +74,8 @@ const AuthProvider = ({ children }) => {
     user,
     logOut,
     profileUpdate,
+    forgetPass,
+    emailVerify,
   };
 
   return (

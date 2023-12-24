@@ -76,9 +76,11 @@ const Login = () => {
           </div>
         </form>
         <div className="space-y-1">
-          <button className="text-xs hover:underline text-gray-400">
-            Forgot password?
-          </button>
+          <NavLink to="/forgetpassword">
+            <button className="text-xs hover:underline text-gray-400">
+              Forgot password?
+            </button>
+          </NavLink>
         </div>
         <div className="flex items-center pt-4 space-x-1">
           <div className="flex-1 h-px sm:w-16 dark:bg-gray-700"></div>
