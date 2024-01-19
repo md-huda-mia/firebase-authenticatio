@@ -4,7 +4,7 @@ import { AuthContext } from "../context/AuthProvider";
 import { toast } from "react-toastify";
 
 const SocialLogin = () => {
-  const { googleUser, githubLogin, microsoftLogin } = useContext(AuthContext);
+  const { googleUser, githubLogin } = useContext(AuthContext);
   const navigate = useNavigate();
 
   // social handler login ==========
@@ -30,11 +30,6 @@ const SocialLogin = () => {
           onClick={() => handleSocialLogin(githubLogin)}
           className="btn btn-neutral btn-sm ">
           GitHub
-        </button>
-        <button
-          onClick={() => handleSocialLogin(microsoftLogin)}
-          className="btn btn-neutral btn-sm ">
-          Microsoft
         </button>
       </div>
     </>
